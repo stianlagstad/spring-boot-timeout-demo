@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: timeout-demo
+server.port: 7777
+
+logging:
+  level:
+    com.example: TRACE
+
+hystrix:
+  command:
+    default:
+      execution.isolation.thread.timeoutInMilliseconds: 60000
+      circuitBreaker:
+        enabled: true
+        sleepWindowInMilliseconds: 300000
+      fallback.enabled: false
+    # My client
+    MyFeignClient#getPost:
+      execution.isolation.thread.timeoutInMilliseconds: 1
